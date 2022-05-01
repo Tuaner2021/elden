@@ -1,58 +1,46 @@
-name: Elden Release
+name: Changesets
 
 on:
   push:
-    branches: 
+    branches:
       - main
-  pull_request:
-    branches: 
-      - main
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+env:
+  CI: true
+  PNPM_CACHE_FOLDER: .pnpm-store
 
 jobs:
-  release:
-    name: Release
+  version:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout code repository
         uses: actions/checkout@v2
         with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-
-      - name: Setup Node.js 16.x
+      
+      - name: Setup node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install pnpm
-        run: npm install pnpm -g
-
-      - name: Install Dependencies
-        run: pnpm i
-
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            email=tuaner2021@163.com
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          node-version: 16
      
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
+      - name: Install pnpm
+        run: npm i pnpm@latest -g
+      
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      
+      - name: Setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+      
+      - name: Install sependencies
+        run: pnpm install
+      
+      - name: Create and publish versions
+        uses: changesets/action@master
         with:
-          publish: pnpm run release
           version: pnpm run version
+          commit: "chore: update versions"
+          title: "chore: update versions"
+          publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Send a Slack notification if a publish happens
-        if: steps.changesets.outputs.published == 'true'
-        # You can do something when a publish happens.
-        run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
