@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+      - main
 env:
   CI: true
   PNPM_CACHE_FOLDER: .pnpm-store
@@ -43,4 +45,4 @@ jobs:
           title: "chore: update versions"
           publish: pnpm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
