@@ -8,6 +8,7 @@ const appPath = getAppPath()
 
 const runDev = (appName) => {
   install(appName)
+  
   const packageName = getPackageName(appName)
   execa.sync('turbo', ['run', 'dev', `--filter=${packageName}`], {
     stdio: 'inherit',
