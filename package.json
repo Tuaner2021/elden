@@ -20,7 +20,7 @@
     "apps/*"
   ],
   "dependencies": {
-    "@tuaner/elden-scripts": "workspace:latest"
+    "tuaner-elden-scripts": "workspace:latest"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
