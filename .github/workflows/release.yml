@@ -2,9 +2,11 @@ name: Elden Release
 
 on:
   push:
-    branches: - [origin/main]
+    branches: 
+      - main
   pull_request:
-    branches: - [origin/main]
+    branches: 
+      - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
