@@ -5,13 +5,13 @@ importers:
   .:
     specifiers:
       '@changesets/cli': ^2.22.0
+      '@tuaner/elden-scripts': workspace:latest
       eslint: ^8.14.0
       prettier: ^2.6.2
-      tuaner-elden-scripts: workspace:latest
       turbo: ^1.2.5
       typescript: ^4.6.3
     dependencies:
-      tuaner-elden-scripts: link:packages/scripts
+      '@tuaner/elden-scripts': link:packages/scripts
     devDependencies:
       '@changesets/cli': registry.npmmirror.com/@changesets/cli/2.22.0
       eslint: registry.npmmirror.com/eslint/8.14.0

@@ -33,6 +33,15 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            email=tuaner2021@163.com
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+     
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1

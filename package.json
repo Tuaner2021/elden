@@ -13,14 +13,14 @@
     "version": "changeset version",
     "changeset:publish": "changeset publish",
     "release": "pnpm run build && pnpm run release:only",
-    "release:only": "changeset publish --registry=//registry.npmjs.org/"
+    "release:only": "changeset publish --registry=//registry.npmjs.org"
   },
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "dependencies": {
-    "tuaner-elden-scripts": "workspace:latest"
+    "@tuaner/elden-scripts": "workspace:latest"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
