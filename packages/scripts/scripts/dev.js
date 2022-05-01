@@ -1,5 +1,3 @@
-const path = require('path')
-const fs = require('fs-extra')
 const execa = require('execa')
 const glob = require('glob')
 const chalk = require('chalk')
