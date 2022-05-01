@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 env:
   CI: true
   PNPM_CACHE_FOLDER: .pnpm-store
@@ -36,6 +39,7 @@ jobs:
         run: pnpm install
       
       - name: Create and publish versions
+        id: changesets
         uses: changesets/action@master
         with:
           version: pnpm run version
@@ -43,4 +47,9 @@ jobs:
           title: "chore: update versions"
           publish: pnpm run release
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      
+      - name: Send a slack notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"

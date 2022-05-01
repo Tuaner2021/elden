@@ -5,6 +5,7 @@
   "author": "",
   "license": "ISC",
   "main": "index.js",
+  "homepage": "https://[username].github.io/elden",
   "scripts": {
     "create": "elden create",
     "build": "elden build",
