@@ -1,0 +1,20 @@
+{
+  "name": "@tuaner/elden-scripts",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "bin": {
+    "elden": "bin/index.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "enquirer": "^2.3.6",
+    "chalk": "^4.1.2"
+  },
+  "dependencies": {
+    "execa": "^4.0.2",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.1",
+    "lodash": "^4.17.21"
+  }
+}
