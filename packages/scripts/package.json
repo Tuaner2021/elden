@@ -1,6 +1,6 @@
 {
   "name": "@tuaner/elden-scripts",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "bin": {
     "elden": "bin/index.js"
