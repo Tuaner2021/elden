@@ -20,10 +20,8 @@
     "packages/*",
     "apps/*"
   ],
-  "dependencies": {
-    "@tuaner/elden-scripts": "workspace:latest"
-  },
   "devDependencies": {
+    "@tuaner/elden-scripts": "workspace:latest",
     "@changesets/cli": "^2.22.0",
     "eslint": "^8.14.0",
     "prettier": "^2.6.2",
